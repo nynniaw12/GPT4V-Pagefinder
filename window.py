@@ -194,3 +194,5 @@ def screen_page(driver, url, data_dir, min_width, min_height):
     l_path = os.path.join(data_dir, filename)
 
     screenshot.save(l_path)
+
+    return filtered_elements, l_path

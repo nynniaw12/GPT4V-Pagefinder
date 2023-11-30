@@ -11,7 +11,7 @@ def prompt(task, prev, info):
     RememberInfoFromSite = '{ "action": "remember-info", "info": "<info>" }'
     Done = '{ "action": "done" }'
 
-    prompt_template = f"""task: {task}
+    prompt_template = f"""task: Find out how to {task}
 
 type ClickAction = {ClickAction}
 type TypeAction = {TypeAction}
@@ -50,6 +50,7 @@ type Done = {Done}
 
 ## instructions
 # observe the screenshot, and think about the next action
+# prioritize intuitive actions i.e. clicking on elements located above on the screen
 # do not propose actions based on speculation
 # done when user input is necessary
 # output your response in a json markdown code block

@@ -38,8 +38,7 @@ def element_contains(driver, parent: WebElement, child: WebElement):
     # Checks if the parent element contains the child element
     return driver.execute_script("return arguments[0].contains(arguments[1]);", parent, child)
 
-def screen_page(driver, url, data_dir, min_width, min_height):
-    driver.get(url)
+def screen_page(driver, data_dir, min_width, min_height):
 
     selector = "input, textarea, select, button, a, iframe, video"
 
@@ -47,16 +46,18 @@ def screen_page(driver, url, data_dir, min_width, min_height):
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, selector))
     )
 
-    required_width = driver.execute_script('return document.documentElement.scrollWidth')
-    required_height = driver.execute_script('return document.documentElement.scrollHeight')
+    ## IMPLEMENT SCROLL
 
-    if required_width < min_width:
-        required_width = min_width
+    # required_width = driver.execute_script('return document.documentElement.scrollWidth')
+    # required_height = driver.execute_script('return document.documentElement.scrollHeight')
 
-    if required_height < min_height:
-        required_height = min_height
+    # if required_width < min_width:
+    #     required_width = min_width
 
-    driver.set_window_size(required_width, required_height)
+    # if required_height < min_height:
+    #     required_height = min_height
+
+    driver.set_window_size(min_width, min_height)
 
 
     fp_path = os.path.join(data_dir, 'fp.png')
@@ -179,10 +180,11 @@ def screen_page(driver, url, data_dir, min_width, min_height):
             text_position = (rect['x'], rect['y'] - 32)
 
         # Draw a rectangle and text with the specified bold font and size
+        expansion = 2.5
         draw.rectangle(
-            [(rect['x'], rect['y']), (rect['x'] + rect['width'], rect['y'] + rect['height'])],
+            [(rect['x'] - expansion, rect['y'] - expansion), (rect['x'] + rect['width'] + expansion, rect['y'] + rect['height'] + expansion)],
             outline=color,
-            width=5
+            width=3
         )
         
         draw.rectangle([(box_x1, box_y1), (box_x2, box_y2)], fill=box_color)

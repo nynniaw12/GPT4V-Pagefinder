@@ -1,0 +1,5 @@
+1/ Add scroll
+2/ Optimize scraping
+3/ Multiple features
+4/ Flask front-end
+5/ Caching other adds
